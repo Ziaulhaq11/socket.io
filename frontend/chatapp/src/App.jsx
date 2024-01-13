@@ -7,8 +7,7 @@ const userName = nanoid(4)
 const socket = io("http://localhost:5000/");
 function App() {
   const [message, setMessage] = useState("");
-  const [chat, setChat] = useState([]);
-
+  const [chats, setChats] = useState([]);
 
   const sendChat = (e) => {
     e.preventDefault();
@@ -19,7 +18,7 @@ function App() {
   useEffect(() => {
     //we're not listening from the message state, we're listening from the event
     socket.on("chat", (payload) => {
-      setChat([...chat, payload]);
+      setChats([...chats, payload]);
     });
   });
 
@@ -27,7 +26,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Chat App</h1>
-        {chat.map((chat, index) => {
+        {chats.map((chat, index) => {
           return <p key={index}>{chat.message} : <span>id : {chat.userName}</span> </p>;
         })}
         <form onSubmit={sendChat}>

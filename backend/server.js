@@ -4,7 +4,7 @@ const { Server } = require("socket.io");
 
 const app = express();
 //TODO:check with new Syntax
-const server = http.createServer(app); //In new version No need to import http.
+const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
@@ -13,8 +13,6 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log(socket);
-  console.log("Socket is active");
 
   socket.on("chat", (payload) => {
      //we're lstening to the event, so we need to response to that event, so we use IO
